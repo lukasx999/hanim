@@ -1,0 +1,12 @@
+cabal-version: 2.2
+
+name:           lambda
+version:        0.1.0.0
+build-type:     Simple
+
+executable bin
+  main-is: Main.hs
+  hs-source-dirs:
+      src
+  build-depends:
+      base, gloss, time
