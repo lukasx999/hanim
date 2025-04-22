@@ -7,26 +7,26 @@ import GHC.IO.Unsafe
 width = 900
 height = 600
 
-circ :: Float -> Float -> Float -> Picture
-circ dt speed_factor radius =
+colors :: [Color]
+colors = [ red, green, blue ]
+
+circ :: Float -> Float -> Float -> Color -> Picture
+circ dt speed_factor radius color =
     let w = fromIntegral width in
     -- circle starts at center
     let x = ((w / 2) - radius) * (sin $ dt * speed_factor) in
-    Translate x 0 $ Color white $ Circle radius
+    Translate x 0 $ Color color $ Circle radius
 
 circgen :: Float -> Float -> [Picture]
 circgen dt n =
-    map (\x -> circ dt x (x*5)) [1..n]
-
+    let color = colors !! ((round dt) `mod` (length colors)) in
+    map (\x -> circ dt (x * 0.1) (x*5) color) [1..n]
 
 draw :: Float -> Picture
 draw dt =
-    Pictures $ circgen dt 30
-    -- let c = circ dt 1 100 in
-    -- let c' = circ dt 2 75 in
-    -- let c'' = circ dt 3 50 in
-    -- let c''' = circ dt 4 25 in
-    -- Pictures [c, c', c'', c''']
+    let circles = circgen dt 1000 in
+    let pictures = [] in
+    Pictures $ pictures ++ circles
 
 main :: IO ()
 main =
