@@ -2,7 +2,6 @@ module Main (main) where
 
 import Graphics.Gloss
 import Data.Time.Clock.POSIX (getPOSIXTime)
-import GHC.IO.Unsafe
 
 title  = "the lambdas must flow!"
 width  = 900
@@ -10,11 +9,15 @@ height = 600
 colors = [ red, blue ]
 
 circ :: Float -> Float -> Float -> Color -> Picture
-circ dt speed_factor radius color =
-    let w = fromIntegral width in
+circ dt speed radius color =
     -- circle starts at center
-    let x = ((w / 2) - radius) * (sin $ dt * speed_factor) in
-    Translate x 0 $ Color color $ Circle radius
+    let x   = (((fromIntegral width)  / 2) - radius) * (sin $ dt * speed) in
+    let y   = (((fromIntegral height) / 2) - radius) * (sin $ dt * speed) in
+    let rot = (round (dt * 100)) `mod` 360 in
+    Rotate (fromIntegral rot)
+        $ Translate x y
+        $ Color color
+        $ ThickCircle radius 5
 
 circgen :: Float -> Float -> [Picture]
 circgen dt n =
@@ -23,7 +26,7 @@ circgen dt n =
 
 draw :: Float -> Picture
 draw dt =
-    let circles = circgen dt 1000 in
+    let circles = circgen dt 30 in
     let pictures = [] in
     Pictures $ pictures ++ circles
 
