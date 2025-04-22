@@ -7,16 +7,20 @@ import GHC.IO.Unsafe
 width = 900
 height = 600
 
-draw :: Float -> Picture
-draw dt =
-    let speed_factor = 5 in
-    let radius = 50 in
-
+circ :: Float -> Float -> Float -> Picture
+circ dt speed_factor radius =
     let w = fromIntegral width in
     -- circle starts at center
     let x = ((w / 2) - radius) * (sin $ dt * speed_factor) in
-    let circle = Translate x 0 $ Color white $ Circle radius in
-    Pictures [circle]
+    Translate x 0 $ Color white $ Circle radius
+
+draw :: Float -> Picture
+draw dt =
+    let c = circ dt 1 100 in
+    let c' = circ dt 2 75 in
+    let c'' = circ dt 3 50 in
+    let c''' = circ dt 4 25 in
+    Pictures [c, c', c'', c''']
 
 main :: IO ()
 main =
