@@ -14,13 +14,19 @@ circ dt speed_factor radius =
     let x = ((w / 2) - radius) * (sin $ dt * speed_factor) in
     Translate x 0 $ Color white $ Circle radius
 
+circgen :: Float -> Float -> [Picture]
+circgen dt n =
+    map (\x -> circ dt x (x*5)) [1..n]
+
+
 draw :: Float -> Picture
 draw dt =
-    let c = circ dt 1 100 in
-    let c' = circ dt 2 75 in
-    let c'' = circ dt 3 50 in
-    let c''' = circ dt 4 25 in
-    Pictures [c, c', c'', c''']
+    Pictures $ circgen dt 30
+    -- let c = circ dt 1 100 in
+    -- let c' = circ dt 2 75 in
+    -- let c'' = circ dt 3 50 in
+    -- let c''' = circ dt 4 25 in
+    -- Pictures [c, c', c'', c''']
 
 main :: IO ()
 main =
