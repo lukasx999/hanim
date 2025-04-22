@@ -6,9 +6,7 @@ import GHC.IO.Unsafe
 
 width = 900
 height = 600
-
-colors :: [Color]
-colors = [ red, green, blue ]
+colors = [ red, blue ]
 
 circ :: Float -> Float -> Float -> Color -> Picture
 circ dt speed_factor radius color =
@@ -20,7 +18,7 @@ circ dt speed_factor radius color =
 circgen :: Float -> Float -> [Picture]
 circgen dt n =
     let color = colors !! ((round dt) `mod` (length colors)) in
-    map (\x -> circ dt (x * 0.1) (x*5) color) [1..n]
+    map (\x -> circ dt (x * 0.1) (x * 5) color) [1..n]
 
 draw :: Float -> Picture
 draw dt =
