@@ -6,7 +6,7 @@ import Data.Time.Clock.POSIX (getPOSIXTime)
 title  = "the lambdas must flow!"
 width  = 900
 height = 600
-colors = [ red, blue ]
+colors = [ blue, white ]
 
 circ :: Float -> Float -> Float -> Color -> Picture
 circ dt speed radius color =
