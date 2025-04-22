@@ -4,7 +4,8 @@ import Graphics.Gloss
 import Data.Time.Clock.POSIX (getPOSIXTime)
 import GHC.IO.Unsafe
 
-width = 900
+title  = "the lambdas must flow!"
+width  = 900
 height = 600
 colors = [ red, blue ]
 
@@ -28,5 +29,5 @@ draw dt =
 
 main :: IO ()
 main =
-    let dpy = InWindow "functional graphics" (width, height) (0, 0) in
+    let dpy = InWindow title (width, height) (0, 0) in
     animate dpy black draw
