@@ -8,11 +8,13 @@ width = 900
 height = 600
 
 draw :: Float -> Picture
-draw t =
+draw dt =
+    let radius = 50 in
     let w = fromIntegral width in
-    let x = w * ((sin t) * 0.5 + 0.5) - w / 2 in
-    let y = 0 in
-    let circle = Translate x y $ Color white $ Circle 50 in
+    -- circle starts at center
+    let speed_factor = 5 in
+    let x = ((w / 2) - radius) * (sin $ dt * speed_factor) in
+    let circle = Translate x 0 $ Color white $ Circle radius in
     Pictures [circle]
 
 main :: IO ()
