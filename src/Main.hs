@@ -17,7 +17,7 @@ circ dt speed radius color =
     Rotate (fromIntegral rot)
         $ Translate x y
         $ Color color
-        $ ThickCircle radius 5
+        $ ThickCircle radius 3
 
 circgen :: Float -> Float -> [Picture]
 circgen dt n =
